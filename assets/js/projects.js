@@ -25,6 +25,7 @@ window.PROJECTS = [
   {
     slug: "get-experimental",
     title: "Get Experimental",
+    year: 2026,
     section: "directing",
     role: "Director / DP / Color / Edit",
     genre: "Neo Noir",
@@ -35,6 +36,7 @@ window.PROJECTS = [
   {
     slug: "light-fall",
     title: "Light Fall",
+    year: 2026,
     section: "directing",
     role: "Director",
     genre: "Fan Project",
@@ -47,6 +49,7 @@ window.PROJECTS = [
   {
     slug: "1366",
     title: "1366",
+    year: 2025,
     section: "directing",
     role: "Director",
     genre: "Psychological Thriller",
