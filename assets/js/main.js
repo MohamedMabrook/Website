@@ -1,7 +1,7 @@
 (function () {
   const projects = window.PROJECTS || [];
 
-  // Builds a frame: real <video>/<img> when a source exists, drifting placeholder otherwise.
+  // Builds a frame: real <video>/<img> when a source exists, flat placeholder otherwise.
   function frame(p, opts = {}) {
     const el = document.createElement("div");
     const ratio = opts.ratio || p.ratio;
@@ -24,10 +24,6 @@
       el.appendChild(img);
     } else {
       el.classList.add("placeholder");
-      if (opts.still) el.classList.add("static");
-      el.style.setProperty("--tone", (p.tone || 0) + (opts.shift || 0));
-      el.style.setProperty("--x", (opts.x ?? 30) + "%");
-      el.style.setProperty("--y", (opts.y ?? 60) + "%");
     }
     return el;
   }
@@ -35,18 +31,22 @@
   const play = (el) => { const v = el.querySelector("video"); if (v) v.play().catch(() => {}); };
   const pause = (el) => { const v = el.querySelector("video"); if (v) v.pause(); };
 
+  // Newest first: "Coming soon" on top, then by year; undated keep their listed order.
+  const rank = (p) => (p.status ? Infinity : p.year || -Infinity);
+  const inSection = (p, id) => [].concat(p.section || []).includes(id);
+
   // ---------- Homepage ----------
-  // Scroll-driven sections. The section in the middle of the viewport sets the
-  // atmosphere: its footage plays full-bleed over the page at low opacity.
+  // Scroll-driven sections; the header names the one in the middle of the viewport.
+  // Hovering a film fades its footage in over the page at low opacity.
   const sectionsEl = document.querySelector(".sections");
   if (sectionsEl) {
     const atmos = document.querySelector(".atmos");
     const hud = document.querySelector(".hud");
     const layers = {};
     let current = null;
-    let sectionKey = null;
 
     const layer = (key, src) => {
+      if (!src.loop && !src.poster) return null;
       if (!layers[key]) {
         const f = frame(src);
         f.classList.add("atmos-layer");
@@ -65,12 +65,14 @@
     (window.SECTIONS || []).forEach((s) => {
       const sec = document.getElementById(s.id);
       if (!sec) return;
-      layer("s:" + s.id, { title: s.label, ratio: 1.78, tone: s.tone, loop: s.loop, poster: s.poster });
       sec.dataset.hud = s.label;
 
       if (s.list) {
         const list = sec.querySelector(".rows");
-        projects.filter((p) => p.section === s.id).forEach((p) => {
+        projects
+          .filter((p) => inSection(p, s.id))
+          .sort((a, b) => rank(b) - rank(a))
+          .forEach((p) => {
           layer("p:" + p.slug, { ...p, ratio: 1.78 });
           const a = document.createElement("a");
           a.className = "row";
@@ -80,7 +82,7 @@
           a.querySelector(".year").textContent = p.status || p.year || "";
           if (p.status) a.querySelector(".year").classList.add("status");
           const on = () => { list.classList.add("has-focus"); a.classList.add("is-active"); show("p:" + p.slug); };
-          const off = () => { list.classList.remove("has-focus"); a.classList.remove("is-active"); show(sectionKey); };
+          const off = () => { list.classList.remove("has-focus"); a.classList.remove("is-active"); show(null); };
           a.addEventListener("mouseenter", on);
           a.addEventListener("focus", on);
           a.addEventListener("mouseleave", off);
@@ -93,8 +95,6 @@
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
-        sectionKey = "s:" + e.target.id;
-        show(sectionKey);
         if (hud) hud.textContent = e.target.dataset.hud;
       });
     }, { rootMargin: "-50% 0px -50% 0px" });
@@ -125,9 +125,6 @@
         src: s.src,
         ratio: s.ratio,
         still: true,
-        shift: (n * 17) % 40,
-        x: (n * 37) % 100,
-        y: (n * 53 + 20) % 100,
       });
       stills.appendChild(f);
     });

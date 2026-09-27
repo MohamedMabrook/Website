@@ -18,10 +18,10 @@
 }
 
 :root {
-  --bg: #0b0a08;
+  --bg: #000;
   --fg: #f1e9c6;      /* off-white, yellow cast */
-  --red: #e5443a;     /* secondary text, labels, dimmed states */
-  --faint: #3a1613;   /* rules */
+  --red: #a3000b;     /* deep red: secondary text, labels, dimmed states */
+  --faint: #2a0205;   /* rules */
   --gutter: clamp(16px, 3vw, 40px);
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   /* Destiny's UI face: red labels and all numbers. */
@@ -77,12 +77,12 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .site-header a:hover { opacity: 0.55; }
 
 /* ---------- Placeholder media ---------- */
-/* Stand-in for a loop or still. Slow drift suggests motion without real footage. */
+/* Stand-in for a still that hasn't been supplied yet: a flat dark frame. */
 
 .frame {
   position: relative;
   aspect-ratio: var(--ar, 1.78);
-  background: #111;
+  background: #0e0e0e;
   overflow: hidden;
 }
 .frame video, .frame img {
@@ -91,23 +91,10 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   object-fit: cover;
   display: block;
 }
-.frame.placeholder {
-  background:
-    radial-gradient(ellipse at var(--x, 30%) var(--y, 60%), hsl(var(--tone) 22% 22%) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, hsl(calc(var(--tone) + 30) 18% 14%) 0%, transparent 55%),
-    linear-gradient(160deg, hsl(var(--tone) 12% 9%), hsl(var(--tone) 8% 5%));
-  background-size: 180% 180%, 160% 160%, 100% 100%;
-  animation: drift 9s ease-in-out infinite alternate;
-}
-.frame.placeholder.static { animation: none; }
-@keyframes drift {
-  from { background-position: 0% 0%, 100% 0%, 0 0; }
-  to   { background-position: 100% 100%, 0% 100%, 0 0; }
-}
 
 /* ---------- Homepage ---------- */
 
-/* Footage layer sits over the content, not behind it, so it tints everything. */
+/* Hover footage sits over the content, not behind it. */
 .atmos {
   position: fixed;
   inset: 0;
@@ -124,14 +111,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   transition: opacity 1.2s var(--ease);
 }
 .atmos-layer.is-active { opacity: 0.3; }
-.atmos-layer.placeholder {
-  /* Brighter than the frame placeholders so 30% reads like real footage would. */
-  background:
-    radial-gradient(ellipse at var(--x, 30%) var(--y, 60%), hsl(var(--tone) 35% 62%) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, hsl(calc(var(--tone) + 30) 30% 40%) 0%, transparent 50%),
-    linear-gradient(160deg, hsl(var(--tone) 20% 22%), hsl(var(--tone) 15% 8%));
-  background-size: 140% 140%, 130% 130%, 100% 100%;
-}
 
 .site-header .hud {
   position: absolute;
@@ -142,10 +121,12 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 
 .sections section {
-  min-height: 100vh;
-  padding: 120px var(--gutter) 80px;
+  padding: 0 var(--gutter);
   position: relative;
 }
+.sections .hero { min-height: 100vh; padding-block: 120px 80px; }
+.sections .category { padding-block: clamp(56px, 9vh, 96px) 0; }
+.sections .category:last-child { padding-bottom: clamp(80px, 14vh, 140px); }
 
 .hero {
   display: flex;
@@ -183,7 +164,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   text-transform: uppercase;
   letter-spacing: var(--track-snug);
   line-height: 0.95;
-  margin-bottom: clamp(48px, 10vh, 120px);
+  margin-bottom: clamp(24px, 4vh, 40px);
 }
 
 .rows { border-bottom: 1px solid var(--faint); }
@@ -303,37 +284,10 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .next:hover strong { opacity: 0.55; }
 
-/* ---------- Info page ---------- */
+/* ---------- Info ---------- */
 
-.info {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 48px var(--gutter);
-  align-content: center;
-}
-.info .bio {
-  grid-column: 1 / span 7;
-  font-size: clamp(22px, 2.6vw, 36px);
-  font-weight: 800;
-  letter-spacing: var(--track-snug);
-  line-height: 1.35;
-}
-.info .contact {
-  grid-column: 9 / span 4;
-  align-self: end;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.info .contact a { border-bottom: 1px solid var(--faint); width: fit-content; }
-.info .contact a:hover { border-color: var(--fg); }
-
-@media (max-width: 720px) {
-  .info { grid-template-columns: 1fr; align-content: start; }
-  .info .bio, .info .contact { grid-column: 1; }
-}
+.row .contact-value { text-transform: none; }
+#info .row .year { text-transform: uppercase; }
 
 /* ---------- Red text ---------- */
 /* Project-page labels follow the main menu: bold Destiny face, no letter tracking,
