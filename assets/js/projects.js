@@ -70,8 +70,8 @@ window.PROJECTS = [
     slug: "dark-knight-test",
     title: "Dark Knight Test",
     year: 2025,
-    section: "cinematography",
-    role: "DP",
+    section: "directing",
+    role: "Director / DP / Color / Edit",
     genre: "Fan Project",
     ratio: 1.78,
     poster: "media/dark-knight-test/01.webp",
@@ -110,6 +110,16 @@ window.PROJECTS = [
     ratio: 1.78,
     poster: "media/zulu/01.webp",
     stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/zulu/0${n + 1}.webp` })),
+  },
+  {
+    slug: "dreamer",
+    title: "Dreamer",
+    year: 2025,
+    section: "cinematography",
+    role: "DP / Color",
+    ratio: 1.44,
+    poster: "media/dreamer/01.webp",
+    stills: Array.from({ length: 5 }, (_, n) => ({ src: `media/dreamer/0${n + 1}.webp` })),
   },
 ];
 
