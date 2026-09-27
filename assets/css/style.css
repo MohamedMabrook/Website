@@ -87,70 +87,127 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 
 /* ---------- Homepage ---------- */
 
-.stage {
+/* Footage layer sits over the content, not behind it, so it tints everything. */
+.atmos {
   position: fixed;
   inset: 0;
-  display: grid;
-  place-items: center;
+  z-index: 5;
   pointer-events: none;
-  z-index: 0;
+  /* Screen lifts the blacks with footage but never dims the type. */
+  mix-blend-mode: screen;
 }
-.stage .frame {
+.atmos-layer {
   position: absolute;
-  width: min(84vw, calc(72vh * var(--ar)));
+  inset: 0;
+  aspect-ratio: auto;
   opacity: 0;
-  transition: opacity 0.6s var(--ease);
+  transition: opacity 1.2s var(--ease);
 }
-.stage .frame.is-active { opacity: 1; }
+.atmos-layer.is-active { opacity: 0.3; }
+.atmos-layer.placeholder {
+  /* Brighter than the frame placeholders so 30% reads like real footage would. */
+  background:
+    radial-gradient(ellipse at var(--x, 30%) var(--y, 60%), hsl(var(--tone) 35% 62%) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, hsl(calc(var(--tone) + 30) 30% 40%) 0%, transparent 50%),
+    linear-gradient(160deg, hsl(var(--tone) 20% 22%), hsl(var(--tone) 15% 8%));
+  background-size: 140% 140%, 130% 130%, 100% 100%;
+}
+.atmos-layer.placeholder::after { left: var(--gutter); bottom: var(--gutter); }
 
-.index {
-  position: relative;
-  z-index: 1;
+.site-header .hud {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.sections section {
   min-height: 100vh;
+  padding: 120px var(--gutter) 80px;
+  position: relative;
+}
+
+.hero {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 96px var(--gutter);
-  list-style: none;
+  justify-content: flex-end;
 }
-.index li { width: fit-content; }
-.index a {
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 12vw, 200px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.86;
+}
+.hero .role, .hero .cue {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero .role { margin-top: 24px; color: var(--dim); }
+.hero .cue {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 80px;
+}
+.hero .cue::after { content: " \2193"; }
+
+.category h2 {
   display: flex;
   align-items: baseline;
-  gap: 14px;
-  padding: 2px 0;
-  transition: opacity 0.4s var(--ease);
-}
-.index .title {
+  gap: 20px;
   font-family: var(--font-display);
-  font-size: clamp(24px, 3.2vw, 44px);
+  font-size: clamp(40px, 7vw, 112px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.95;
+  margin-bottom: clamp(48px, 10vh, 120px);
+}
+.category h2 span {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  transform: translateY(-0.4em);
+  align-self: flex-start;
+}
+
+.rows { border-bottom: 1px solid var(--faint); }
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto 72px;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--faint);
+  transition: opacity 0.4s var(--ease), padding 0.4s var(--ease);
+}
+.row .title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 36px);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  line-height: 1.18;
 }
-.index .meta {
+.row .spec, .row .year {
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--dim);
-  white-space: nowrap;
 }
-.index.has-focus a { opacity: 0.22; }
-.index.has-focus a.is-active { opacity: 1; }
-.index a.is-active .meta { color: var(--fg); }
+.row .year { text-align: right; font-variant-numeric: tabular-nums; }
+.rows.has-focus .row { opacity: 0.25; }
+.rows.has-focus .row.is-active { opacity: 1; padding-left: 12px; }
+.row.is-active .spec, .row.is-active .year { color: var(--fg); }
 
-.index .inline-frame { display: none; }
-
-/* Touch devices and narrow screens: no hover, so show each loop inline. */
-@media (hover: none), (max-width: 720px) {
-  .stage { display: none; }
-  .index { justify-content: flex-start; padding-top: 88px; gap: 40px; }
-  .index li { width: 100%; }
-  .index a { flex-direction: column; gap: 6px; }
-  .index.has-focus a { opacity: 1; }
-  .index .inline-frame { display: block; width: 100%; margin-top: 8px; }
-  .index .title { font-size: 26px; }
+@media (max-width: 720px) {
+  .site-header .hud { display: none; }
+  .category h2 { font-size: 8.4vw; gap: 12px; }
+  .row { grid-template-columns: 1fr auto; }
+  .row .spec { display: none; }
 }
 
 /* ---------- Project page ---------- */
@@ -233,8 +290,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 /* ---------- Info page ---------- */
 
 .info {
-  min-height: 100vh;
-  padding: 120px var(--gutter) 80px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 48px var(--gutter);

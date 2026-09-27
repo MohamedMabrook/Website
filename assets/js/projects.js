@@ -68,3 +68,12 @@ window.PROJECTS = [
     tone: 320,
   },
 ];
+
+// Homepage sections. As each one scrolls into view, its `loop` plays over the page at 30%.
+// `role` filters which projects list in that section (matched against project.role).
+window.SECTIONS = [
+  { id: "reel", label: "Reel", tone: 30 },
+  { id: "directing", label: "Directing", role: "Director", tone: 20 },
+  { id: "cinematography", label: "Cinematography", role: "DP", tone: 205 },
+  { id: "info", label: "Info", tone: 0 },
+];

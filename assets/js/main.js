@@ -39,45 +39,69 @@
   const pause = (el) => { const v = el.querySelector("video"); if (v) v.pause(); };
 
   // ---------- Homepage ----------
-  const index = document.querySelector(".index");
-  if (index) {
-    const stage = document.querySelector(".stage");
-    const stageFrames = {};
-    const touch = window.matchMedia("(hover: none), (max-width: 720px)").matches;
+  // Scroll-driven sections. The section in the middle of the viewport sets the
+  // atmosphere: its footage plays full-bleed over the page at low opacity.
+  const sectionsEl = document.querySelector(".sections");
+  if (sectionsEl) {
+    const atmos = document.querySelector(".atmos");
+    const hud = document.querySelector(".hud");
+    const layers = {};
+    let current = null;
+    let sectionKey = null;
 
-    projects.forEach((p) => {
-      const f = frame(p);
-      stage.appendChild(f);
-      stageFrames[p.slug] = f;
+    const layer = (key, src) => {
+      if (!layers[key]) {
+        const f = frame(src, { label: "Atmosphere" });
+        f.classList.add("atmos-layer");
+        atmos.appendChild(f);
+        layers[key] = f;
+      }
+      return layers[key];
+    };
+    const show = (key) => {
+      if (key === current) return;
+      if (current && layers[current]) { layers[current].classList.remove("is-active"); pause(layers[current]); }
+      current = key;
+      if (key && layers[key]) { layers[key].classList.add("is-active"); play(layers[key]); }
+    };
 
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="project.html?p=${p.slug}"><span class="title"></span><span class="meta"></span></a>`;
-      const a = li.firstChild;
-      a.querySelector(".title").textContent = p.title;
-      a.querySelector(".meta").textContent = `${p.role} · ${p.year}`;
-      const inline = frame(p, { autoplay: touch });
-      inline.classList.add("inline-frame");
-      a.appendChild(inline);
-      index.appendChild(li);
+    (window.SECTIONS || []).forEach((s, n) => {
+      const sec = document.getElementById(s.id);
+      if (!sec) return;
+      layer("s:" + s.id, { title: s.label, ratio: 1.78, tone: s.tone, loop: s.loop, poster: s.poster });
+      sec.dataset.hud = String(n).padStart(2, "0") + " / " + s.label;
 
-      const on = () => {
-        index.classList.add("has-focus");
-        index.querySelectorAll("a").forEach((x) => x.classList.toggle("is-active", x === a));
-        Object.values(stageFrames).forEach((x) => { x.classList.remove("is-active"); pause(x); });
-        f.classList.add("is-active");
-        play(f);
-      };
-      const off = () => {
-        index.classList.remove("has-focus");
-        a.classList.remove("is-active");
-        f.classList.remove("is-active");
-        pause(f);
-      };
-      a.addEventListener("mouseenter", on);
-      a.addEventListener("focus", on);
-      a.addEventListener("mouseleave", off);
-      a.addEventListener("blur", off);
+      if (s.role) {
+        const list = sec.querySelector(".rows");
+        projects.filter((p) => p.role.includes(s.role)).forEach((p) => {
+          layer("p:" + p.slug, { ...p, ratio: 1.78 });
+          const a = document.createElement("a");
+          a.className = "row";
+          a.href = `project.html?p=${p.slug}`;
+          a.innerHTML = '<span class="title"></span><span class="spec"></span><span class="year"></span>';
+          a.querySelector(".title").textContent = p.title;
+          a.querySelector(".spec").textContent = [p.format, p.runtime].join(" · ");
+          a.querySelector(".year").textContent = p.year;
+          const on = () => { list.classList.add("has-focus"); a.classList.add("is-active"); show("p:" + p.slug); };
+          const off = () => { list.classList.remove("has-focus"); a.classList.remove("is-active"); show(sectionKey); };
+          a.addEventListener("mouseenter", on);
+          a.addEventListener("focus", on);
+          a.addEventListener("mouseleave", off);
+          a.addEventListener("blur", off);
+          list.appendChild(a);
+        });
+      }
     });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        sectionKey = "s:" + e.target.id;
+        show(sectionKey);
+        if (hud) hud.textContent = e.target.dataset.hud;
+      });
+    }, { rootMargin: "-50% 0px -50% 0px" });
+    sectionsEl.querySelectorAll("section").forEach((sec) => io.observe(sec));
   }
 
   // ---------- Project page ----------
