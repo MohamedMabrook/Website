@@ -127,6 +127,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .sections .hero { min-height: 100vh; padding-block: 120px 80px; }
 .sections .category { padding-block: clamp(56px, 9vh, 96px) 0; }
 .sections .category:last-child { padding-bottom: clamp(80px, 14vh, 140px); }
+.page .category:first-child { padding-top: 120px; }
 
 .hero {
   display: flex;

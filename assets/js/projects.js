@@ -22,7 +22,7 @@ window.PROJECTS = [
   {
     slug: "get-experimental",
     title: "Get Experimental",
-    section: ["directing", "color"],
+    section: "directing",
     role: "Director / DP / Color / Edit",
     ratio: 2.37,
     poster: "media/get-experimental/01.webp",
@@ -77,11 +77,11 @@ window.PROJECTS = [
 ];
 
 // Homepage sections, in page order. The header shows the label of the one on screen.
-// Sections with `list: true` show the projects whose `section` includes their id.
+// Sections with `list: true` show the projects whose `section` includes their id;
+// a list with no projects hides its whole section (e.g. Color until one is added).
 window.SECTIONS = [
   { id: "reel", label: "Reel" },
   { id: "directing", label: "Directing", list: true },
   { id: "cinematography", label: "Cinematography", list: true },
   { id: "color", label: "Color", list: true },
-  { id: "info", label: "Info" },
 ];

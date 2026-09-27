@@ -69,8 +69,9 @@
 
       if (s.list) {
         const list = sec.querySelector(".rows");
-        projects
-          .filter((p) => inSection(p, s.id))
+        const items = projects.filter((p) => inSection(p, s.id));
+        if (!items.length) sec.hidden = true;
+        items
           .sort((a, b) => rank(b) - rank(a))
           .forEach((p) => {
           layer("p:" + p.slug, { ...p, ratio: 1.78 });
