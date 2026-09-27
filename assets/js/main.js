@@ -117,6 +117,9 @@
     const logline = project.querySelector(".logline");
     if (p.logline) logline.textContent = p.logline;
     else logline.hidden = true;
+    const note = project.querySelector(".note");
+    if (p.note) note.textContent = p.note;
+    else note.hidden = true;
 
     const stills = project.querySelector(".stills");
     const list = p.stills && p.stills.length

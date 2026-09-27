@@ -5,6 +5,8 @@
 //           or an array of several. Lists sort themselves newest first.
 //   role    your credit, shown on the project page
 //   genre   shown on the homepage row and project page; leave out to hide
+//   logline one line under the title on the project page (optional)
+//   note    small print under the logline, e.g. rights notices (optional)
 //   credits other crew as [role, name] pairs (optional)
 //   ratio   native aspect ratio as a number (2.39, 1.85, 1.78, 1.33)
 //   year    release year; status (e.g. "Coming soon") shows instead when set
@@ -35,7 +37,11 @@ window.PROJECTS = [
     title: "Light Fall",
     section: "directing",
     role: "Director",
-    ratio: 1.78,
+    logline: "Adapted from Destiny 2.",
+    note: "Fan project. Not affiliated with or endorsed by Bungie. Destiny 2 © Bungie, Inc. All rights reserved.",
+    ratio: 1.42,
+    poster: "media/light-fall/01.webp",
+    stills: Array.from({ length: 5 }, (_, n) => ({ src: `media/light-fall/${String(n + 1).padStart(2, "0")}.webp` })),
   },
   {
     slug: "1366",

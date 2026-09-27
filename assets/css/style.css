@@ -251,8 +251,20 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .project-head .logline {
   margin-top: 28px;
-  max-width: 34em;
-  font-size: 17px;
+  font-family: var(--font-destiny);
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 800;
+  word-spacing: var(--word-wide);
+  text-transform: uppercase;
+}
+.project-head .note {
+  margin-top: 10px;
+  max-width: 60em;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--red);
+  word-spacing: normal;
 }
 
 .stills {
