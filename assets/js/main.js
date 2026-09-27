@@ -65,11 +65,11 @@
       if (key && layers[key]) { layers[key].classList.add("is-active"); play(layers[key]); }
     };
 
-    (window.SECTIONS || []).forEach((s, n) => {
+    (window.SECTIONS || []).forEach((s) => {
       const sec = document.getElementById(s.id);
       if (!sec) return;
       layer("s:" + s.id, { title: s.label, ratio: 1.78, tone: s.tone, loop: s.loop, poster: s.poster });
-      sec.dataset.hud = String(n).padStart(2, "0") + " " + s.label;
+      sec.dataset.hud = s.label;
 
       if (s.role) {
         const list = sec.querySelector(".rows");

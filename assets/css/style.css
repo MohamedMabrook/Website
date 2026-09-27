@@ -1,3 +1,20 @@
+/* Martian Mono, self-hosted (OFL, see assets/fonts/OFL.txt). Loaded twice from one file:
+   "Mono Digits" covers only 0-9 so numbers in any text use it; "Martian Mono" is the
+   full face for red text. */
+@font-face {
+  font-family: "Mono Digits";
+  src: url("../fonts/martian-mono-700.woff2") format("woff2");
+  font-weight: 100 900;
+  unicode-range: U+30-39;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Martian Mono";
+  src: url("../fonts/martian-mono-700.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --bg: #0b0a08;
   --fg: #f1e9c6;      /* off-white, yellow cast */
@@ -5,13 +22,13 @@
   --faint: #3a1613;   /* rules */
   --gutter: clamp(16px, 3vw, 40px);
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
-  /* Martian Mono is loaded as a digits-only subset, so it sets every number and nothing else.
-     Neue Haas Grotesk (Destiny UI type) once licensed; Inter Tight stands in until then. */
+  --font-mono: "Martian Mono", ui-monospace, Menlo, monospace;
+  /* Neue Haas Grotesk (Destiny UI type) once licensed; Inter Tight stands in until then. */
   --track-tight: -0.035em;  /* hero-size caps */
   --track-snug: -0.022em;   /* heading-size caps */
   --track-wide: 0.14em;     /* small labels */
-  --font-display: "Martian Mono", "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Martian Mono", "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Mono Digits", "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Mono Digits", "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -164,7 +181,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .category h2 {
   display: flex;
   align-items: baseline;
-  gap: 20px;
   font-family: var(--font-display);
   font-size: clamp(40px, 7vw, 112px);
   font-weight: 800;
@@ -172,13 +188,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   letter-spacing: var(--track-snug);
   line-height: 0.95;
   margin-bottom: clamp(48px, 10vh, 120px);
-}
-.category h2 span {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--red);
-  transform: translateY(0.35em);
-  align-self: flex-start;
 }
 
 .rows { border-bottom: 1px solid var(--faint); }
@@ -210,7 +219,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 
 @media (max-width: 720px) {
   .site-header .hud { display: none; }
-  .category h2 { font-size: 8.4vw; gap: 12px; }
+  .category h2 { font-size: 8.4vw; }
 }
 
 /* ---------- Project page ---------- */
@@ -315,21 +324,28 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   flex-direction: column;
   gap: 6px;
 }
-.info .contact .label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: var(--track-wide);
-  text-transform: uppercase;
-  color: var(--red);
-  margin-top: 18px;
-}
-.info .contact .label:first-child { margin-top: 0; }
 .info .contact a { border-bottom: 1px solid var(--faint); width: fit-content; }
 .info .contact a:hover { border-color: var(--fg); }
 
 @media (max-width: 720px) {
   .info { grid-template-columns: 1fr; align-content: start; }
   .info .bio, .info .contact { grid-column: 1; }
+}
+
+/* ---------- Red text ---------- */
+/* Secondary text is red and set entirely in the mono. Dimmed rows turn red on hover
+   but keep their face, so titles don't reflow. */
+.site-header .hud,
+.hero .role,
+.row .year,
+.project-head .meta,
+.credits dt,
+.next span,
+.frame.placeholder::after {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 @media (prefers-reduced-motion: reduce) {
