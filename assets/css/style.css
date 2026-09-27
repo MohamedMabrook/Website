@@ -1,0 +1,267 @@
+:root {
+  --bg: #0a0a0a;
+  --fg: #e8e6e3;
+  --dim: #6e6c69;
+  --faint: #2a2928;
+  --gutter: clamp(16px, 3vw, 40px);
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--gutter);
+  z-index: 10;
+  mix-blend-mode: difference;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-header a { transition: opacity 0.3s var(--ease); }
+.site-header a:hover { opacity: 0.55; }
+
+/* ---------- Placeholder media ---------- */
+/* Stand-in for a loop or still. Slow drift suggests motion without real footage. */
+
+.frame {
+  position: relative;
+  aspect-ratio: var(--ar, 1.78);
+  background: #111;
+  overflow: hidden;
+}
+.frame video, .frame img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.frame.placeholder {
+  background:
+    radial-gradient(ellipse at var(--x, 30%) var(--y, 60%), hsl(var(--tone) 22% 22%) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, hsl(calc(var(--tone) + 30) 18% 14%) 0%, transparent 55%),
+    linear-gradient(160deg, hsl(var(--tone) 12% 9%), hsl(var(--tone) 8% 5%));
+  background-size: 180% 180%, 160% 160%, 100% 100%;
+  animation: drift 9s ease-in-out infinite alternate;
+}
+.frame.placeholder.static { animation: none; }
+.frame.placeholder::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 12px; bottom: 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232, 230, 227, 0.35);
+}
+@keyframes drift {
+  from { background-position: 0% 0%, 100% 0%, 0 0; }
+  to   { background-position: 100% 100%, 0% 100%, 0 0; }
+}
+
+/* ---------- Homepage ---------- */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+.stage .frame {
+  position: absolute;
+  width: min(84vw, calc(72vh * var(--ar)));
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+.stage .frame.is-active { opacity: 1; }
+
+.index {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px var(--gutter);
+  list-style: none;
+}
+.index li { width: fit-content; }
+.index a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 2px 0;
+  transition: opacity 0.4s var(--ease);
+}
+.index .title {
+  font-size: clamp(28px, 4.2vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+.index .meta {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.index.has-focus a { opacity: 0.22; }
+.index.has-focus a.is-active { opacity: 1; }
+.index a.is-active .meta { color: var(--fg); }
+
+.index .inline-frame { display: none; }
+
+/* Touch devices and narrow screens: no hover, so show each loop inline. */
+@media (hover: none), (max-width: 720px) {
+  .stage { display: none; }
+  .index { justify-content: flex-start; padding-top: 88px; gap: 40px; }
+  .index li { width: 100%; }
+  .index a { flex-direction: column; gap: 6px; }
+  .index.has-focus a { opacity: 1; }
+  .index .inline-frame { display: block; width: 100%; margin-top: 8px; }
+  .index .title { font-size: 30px; }
+}
+
+/* ---------- Project page ---------- */
+
+.project {
+  padding: 120px var(--gutter) 80px;
+}
+.project-head { margin-bottom: 72px; }
+.project-head h1 {
+  font-size: clamp(36px, 6vw, 84px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+.project-head .meta {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.project-head .logline {
+  margin-top: 28px;
+  max-width: 34em;
+  font-size: 17px;
+  color: #bdbab6;
+}
+
+.stills {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(48px, 10vh, 120px);
+}
+.stills .frame {
+  width: min(100%, calc(82vh * var(--ar)));
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.stills .frame.is-visible { opacity: 1; transform: none; }
+
+.credits {
+  margin-top: 120px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 32px;
+  font-size: 14px;
+  max-width: 560px;
+}
+.credits dt { color: var(--dim); }
+
+.next {
+  display: block;
+  margin-top: 140px;
+  padding-top: 24px;
+  border-top: 1px solid var(--faint);
+}
+.next span {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.next strong {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  transition: opacity 0.3s var(--ease);
+}
+.next:hover strong { opacity: 0.55; }
+
+/* ---------- Info page ---------- */
+
+.info {
+  min-height: 100vh;
+  padding: 120px var(--gutter) 80px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 48px var(--gutter);
+  align-content: center;
+}
+.info .bio {
+  grid-column: 1 / span 7;
+  font-size: clamp(20px, 2.2vw, 28px);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+.info .contact {
+  grid-column: 9 / span 4;
+  align-self: end;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.info .contact .label {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 18px;
+}
+.info .contact .label:first-child { margin-top: 0; }
+.info .contact a { border-bottom: 1px solid var(--faint); width: fit-content; }
+.info .contact a:hover { border-color: var(--fg); }
+
+@media (max-width: 720px) {
+  .info { grid-template-columns: 1fr; align-content: start; }
+  .info .bio, .info .contact { grid-column: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .stills .frame { opacity: 1; transform: none; }
+}
