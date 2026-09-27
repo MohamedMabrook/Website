@@ -48,7 +48,9 @@ window.PROJECTS = [
     year: 2026,
     section: "cinematography",
     role: "DP",
-    ratio: 1.78,
+    ratio: 1.42,
+    poster: "media/dominion/01.webp",
+    stills: Array.from({ length: 5 }, (_, n) => ({ src: `media/dominion/${String(n + 1).padStart(2, "0")}.webp` })),
   },
   {
     slug: "dark-knight-test",
