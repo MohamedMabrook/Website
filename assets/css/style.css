@@ -5,6 +5,9 @@
   --faint: #2a2928;
   --gutter: clamp(16px, 3vw, 40px);
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  /* Neue Haas Grotesk (Destiny UI type) once licensed; Inter Tight stands in until then. */
+  --font-display: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -15,10 +18,10 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-text);
   font-size: 15px;
-  line-height: 1.45;
-  letter-spacing: -0.005em;
+  line-height: 1.5;
+  letter-spacing: 0.012em;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -119,10 +122,12 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   transition: opacity 0.4s var(--ease);
 }
 .index .title {
-  font-size: clamp(28px, 4.2vw, 56px);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.12;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 44px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.18;
 }
 .index .meta {
   font-size: 12px;
@@ -145,7 +150,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   .index a { flex-direction: column; gap: 6px; }
   .index.has-focus a { opacity: 1; }
   .index .inline-frame { display: block; width: 100%; margin-top: 8px; }
-  .index .title { font-size: 30px; }
+  .index .title { font-size: 26px; }
 }
 
 /* ---------- Project page ---------- */
@@ -155,9 +160,11 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .project-head { margin-bottom: 72px; }
 .project-head h1 {
-  font-size: clamp(36px, 6vw, 84px);
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
   line-height: 1.02;
 }
 .project-head .meta {
@@ -214,9 +221,11 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .next strong {
   display: block;
   margin-top: 6px;
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 400;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 40px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   transition: opacity 0.3s var(--ease);
 }
 .next:hover strong { opacity: 0.55; }
