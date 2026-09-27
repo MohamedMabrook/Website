@@ -66,9 +66,11 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   padding: var(--gutter);
   z-index: 10;
   color: var(--fg);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: var(--track-wide);
+  font-family: var(--font-destiny);
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: var(--word-wide);
   text-transform: uppercase;
 }
 .site-header a { transition: opacity 0.3s var(--ease); }
@@ -221,11 +223,8 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   font-variant-numeric: tabular-nums;
 }
 .row .year.status {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  word-spacing: 0.6em;
   text-transform: uppercase;
+  word-spacing: var(--word-wide);
 }
 .rows.has-focus .row { color: var(--red); }
 .rows.has-focus .row.is-active { color: var(--fg); padding-left: 12px; }
@@ -360,17 +359,18 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   word-spacing: normal;
 }
 
-/* Section label and role line: Destiny-style UI labels. */
+/* Section label and role line: bold Destiny face like the years, red. */
 .site-header .hud,
 .hero .role {
   font-family: var(--font-destiny);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  word-spacing: 0.6em;
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: var(--word-wide);
   text-transform: uppercase;
   color: var(--red);
 }
+.site-header .hud { font-size: inherit; }
+.hero .role { font-size: clamp(22px, 2.6vw, 36px); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
