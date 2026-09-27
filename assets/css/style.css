@@ -220,6 +220,13 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+.row .year.status {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  word-spacing: 0.6em;
+  text-transform: uppercase;
+}
 .rows.has-focus .row { color: var(--red); }
 .rows.has-focus .row.is-active { color: var(--fg); padding-left: 12px; }
 .row.is-active .year { color: var(--fg); }

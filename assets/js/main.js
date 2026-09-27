@@ -80,7 +80,8 @@
           a.href = `project.html#${p.slug}`;
           a.innerHTML = '<span class="title"></span><span class="year"></span>';
           a.querySelector(".title").textContent = p.title;
-          a.querySelector(".year").textContent = p.year;
+          a.querySelector(".year").textContent = p.status || p.year || "";
+          if (p.status) a.querySelector(".year").classList.add("status");
           const on = () => { list.classList.add("has-focus"); a.classList.add("is-active"); show("p:" + p.slug); };
           const off = () => { list.classList.remove("has-focus"); a.classList.remove("is-active"); show(sectionKey); };
           a.addEventListener("mouseenter", on);
@@ -113,7 +114,7 @@
     document.title = `${p.title} · Mohamed Mabrok`;
 
     project.querySelector("h1").textContent = p.title;
-    project.querySelector(".meta").textContent = [p.format, p.year].join(" · ");
+    project.querySelector(".meta").textContent = [p.format, p.status || p.year].filter(Boolean).join(" · ");
     project.querySelector(".logline").textContent = p.logline;
 
     const stills = project.querySelector(".stills");
