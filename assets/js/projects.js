@@ -48,7 +48,10 @@ window.PROJECTS = [
     title: "1366",
     section: "directing",
     role: "Director",
-    ratio: 1.78,
+    ratio: 1.32,
+    poster: "media/1366/01.webp",
+    // Mixed formats: two 1.32:1 frames, then three 2.37:1.
+    stills: [1.32, 1.32, 2.37, 2.37, 2.37].map((ratio, n) => ({ src: `media/1366/0${n + 1}.webp`, ratio })),
   },
   {
     slug: "dominion",
