@@ -4,6 +4,7 @@
 //   section homepage list(s) it appears in: "directing", "cinematography", "color",
 //           or an array of several. Lists sort themselves newest first.
 //   role    your credit, shown on the project page
+//   genre   shown on the homepage row and project page; leave out to hide
 //   credits other crew as [role, name] pairs (optional)
 //   ratio   native aspect ratio as a number (2.39, 1.85, 1.78, 1.33)
 //   year    release year; status (e.g. "Coming soon") shows instead when set
@@ -24,6 +25,7 @@ window.PROJECTS = [
     title: "Get Experimental",
     section: "directing",
     role: "Director / DP / Color / Edit",
+    genre: "Neo Noir",
     ratio: 2.37,
     poster: "media/get-experimental/01.webp",
     stills: Array.from({ length: 15 }, (_, n) => ({ src: `media/get-experimental/${String(n + 1).padStart(2, "0")}.webp` })),
@@ -48,9 +50,10 @@ window.PROJECTS = [
     year: 2026,
     section: "cinematography",
     role: "DP",
+    genre: "Cinematic Documentary",
     ratio: 1.42,
     poster: "media/dominion/01.webp",
-    stills: Array.from({ length: 5 }, (_, n) => ({ src: `media/dominion/${String(n + 1).padStart(2, "0")}.webp` })),
+    stills: Array.from({ length: 8 }, (_, n) => ({ src: `media/dominion/${String(n + 1).padStart(2, "0")}.webp` })),
   },
   {
     slug: "dark-knight-test",

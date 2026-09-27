@@ -76,10 +76,11 @@
           .forEach((p) => {
           layer("p:" + p.slug, { ...p, ratio: 1.78 });
           const a = document.createElement("a");
-          a.className = "row";
+          a.className = "row work";
           a.href = `project.html#${p.slug}`;
-          a.innerHTML = '<span class="title"></span><span class="year"></span>';
+          a.innerHTML = '<span class="title"></span><span class="genre"></span><span class="year"></span>';
           a.querySelector(".title").textContent = p.title;
+          a.querySelector(".genre").textContent = p.genre || "";
           a.querySelector(".year").textContent = p.status || p.year || "";
           if (p.status) a.querySelector(".year").classList.add("status");
           const on = () => { list.classList.add("has-focus"); a.classList.add("is-active"); show("p:" + p.slug); };
@@ -112,7 +113,7 @@
     document.title = `${p.title} · Mohamed Mabrok`;
 
     project.querySelector("h1").textContent = p.title;
-    project.querySelector(".meta").textContent = [p.role, p.format, p.status || p.year].filter(Boolean).join(" · ");
+    project.querySelector(".meta").textContent = [p.role, p.genre, p.format, p.status || p.year].filter(Boolean).join(" · ");
     const logline = project.querySelector(".logline");
     if (p.logline) logline.textContent = p.logline;
     else logline.hidden = true;

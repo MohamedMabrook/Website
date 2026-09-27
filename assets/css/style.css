@@ -65,6 +65,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   justify-content: space-between;
   padding: var(--gutter);
   z-index: 10;
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-destiny);
   font-size: clamp(15px, 1.3vw, 18px);
@@ -198,6 +199,19 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   text-transform: uppercase;
   word-spacing: var(--word-wide);
 }
+/* Film rows: title | genre | year. */
+.row.work { grid-template-columns: 1fr auto auto; }
+.row .genre {
+  font-family: var(--font-destiny);
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: var(--word-wide);
+  text-transform: uppercase;
+  color: var(--red);
+  text-align: right;
+}
+.row.is-active .genre { color: var(--fg); }
 .rows.has-focus .row { color: var(--red); }
 .rows.has-focus .row.is-active { color: var(--fg); padding-left: 12px; }
 .row.is-active .year { color: var(--fg); }
@@ -205,6 +219,12 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 @media (max-width: 720px) {
   .site-header .hud { display: none; }
   .category h2 { font-size: 8.4vw; }
+  /* Genre drops under the title on phones. */
+  .row.work { grid-template-columns: 1fr auto; row-gap: 4px; }
+  .row.work .title { grid-column: 1; grid-row: 1; }
+  .row.work .year { grid-column: 2; grid-row: 1; }
+  .row.work .genre { grid-column: 1 / -1; grid-row: 2; text-align: left; }
+  .row.work .genre:empty { display: none; }
 }
 
 /* ---------- Project page ---------- */
