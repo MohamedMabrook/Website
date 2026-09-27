@@ -23,6 +23,9 @@
   --gutter: clamp(16px, 3vw, 40px);
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   --font-mono: "Martian Mono", ui-monospace, Menlo, monospace;
+  /* Destiny's UI face. Real font needs an Adobe Fonts kit or a license; until then
+     Helvetica Neue (same lineage) on Apple devices, then Helvetica/Arial. */
+  --font-destiny: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Neue Haas Unica", "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* Neue Haas Grotesk (Destiny UI type) once licensed; Inter Tight stands in until then. */
   --track-tight: -0.035em;  /* hero-size caps */
   --track-snug: -0.022em;   /* heading-size caps */
@@ -60,7 +63,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   justify-content: space-between;
   padding: var(--gutter);
   z-index: 10;
-  mix-blend-mode: difference;
   color: var(--fg);
   font-size: 12px;
   font-weight: 700;
@@ -335,8 +337,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 /* ---------- Red text ---------- */
 /* Secondary text is red and set entirely in the mono. Dimmed rows turn red on hover
    but keep their face, so titles don't reflow. */
-.site-header .hud,
-.hero .role,
 .row .year,
 .project-head .meta,
 .credits dt,
@@ -346,6 +346,18 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+/* Section label and role line: Destiny-style UI labels. */
+.site-header .hud,
+.hero .role {
+  font-family: var(--font-destiny);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  word-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--red);
 }
 
 @media (prefers-reduced-motion: reduce) {
