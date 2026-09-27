@@ -72,7 +72,11 @@ window.PROJECTS = [
     year: 2025,
     section: "cinematography",
     role: "DP",
+    genre: "Fan Project",
     ratio: 1.78,
+    poster: "media/dark-knight-test/01.webp",
+    // Four 16:9 frames, then one 4:3.
+    stills: [1.78, 1.78, 1.78, 1.78, 1.33].map((ratio, n) => ({ src: `media/dark-knight-test/0${n + 1}.webp`, ratio })),
   },
   {
     slug: "the-flower",
@@ -99,9 +103,10 @@ window.PROJECTS = [
   {
     slug: "zulu",
     title: "Zulu",
+    year: 2026,
     section: "cinematography",
     role: "DP",
-    genre: "Ad",
+    genre: "Advertisement",
     ratio: 1.78,
     poster: "media/zulu/01.webp",
     stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/zulu/0${n + 1}.webp` })),
