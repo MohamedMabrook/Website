@@ -1,18 +1,20 @@
-/* Martian Mono, self-hosted (OFL, see assets/fonts/OFL.txt), modified: slash removed from the zero. Loaded twice from one file:
-   "Mono Digits" covers only 0-9 so numbers in any text use it; "Martian Mono" is the
-   full face for red text. */
+/* Destiny-style digits. Neue Haas Grotesk is Destiny's UI face; it needs a license or an
+   Adobe Fonts kit, so these fall back through installed relatives (Helvetica Neue on Apple
+   devices, then Helvetica, then Arial). unicode-range limits the face to 0-9, so numbers in
+   any text use it while letters keep their own font. */
 @font-face {
-  font-family: "Mono Digits";
-  src: url("../fonts/martian-mono-plain-zero-700.woff2") format("woff2");
-  font-weight: 100 900;
+  font-family: "Destiny Digits";
+  src: local("Neue Haas Grotesk Display Pro"), local("NeueHaasGroteskDisp Pro"),
+       local("Helvetica Neue"), local("HelveticaNeue"), local("Helvetica"), local("Arial");
+  font-weight: 100 599;
   unicode-range: U+30-39;
-  font-display: swap;
 }
 @font-face {
-  font-family: "Martian Mono";
-  src: url("../fonts/martian-mono-plain-zero-700.woff2") format("woff2");
-  font-weight: 100 900;
-  font-display: swap;
+  font-family: "Destiny Digits";
+  src: local("Neue Haas Grotesk Display Pro Bold"), local("NeueHaasGroteskDisp Pro Bd"),
+       local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"), local("Helvetica Bold"), local("Helvetica-Bold"), local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 600 900;
+  unicode-range: U+30-39;
 }
 
 :root {
@@ -22,17 +24,15 @@
   --faint: #3a1613;   /* rules */
   --gutter: clamp(16px, 3vw, 40px);
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
-  --font-mono: "Martian Mono", ui-monospace, Menlo, monospace;
-  /* Destiny's UI face. Real font needs an Adobe Fonts kit or a license; until then
-     Helvetica Neue (same lineage) on Apple devices, then Helvetica/Arial. */
+  /* Destiny's UI face: red labels and all numbers. */
   --font-destiny: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Neue Haas Unica", "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* Neue Haas Grotesk (Destiny UI type) once licensed; Inter Tight stands in until then. */
   --track-tight: -0.035em;  /* hero-size caps */
   --track-snug: -0.022em;   /* heading-size caps */
   --track-wide: 0.14em;     /* small labels */
   --word-wide: 0.3em;       /* extra gap between words in off-white text */
-  --font-display: "Mono Digits", "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Mono Digits", "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Destiny Digits", "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Destiny Digits", "neue-haas-grotesk-text", "Neue Haas Grotesk Text Pro", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -337,17 +337,17 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 
 /* ---------- Red text ---------- */
-/* Secondary text is red and set entirely in the mono. Dimmed rows turn red on hover
-   but keep their face, so titles don't reflow. */
+/* Secondary text is red and set in the Destiny face, like the numbers. Dimmed rows turn
+   red on hover but keep their face, so titles don't reflow. */
 .row .year,
 .project-head .meta,
 .credits dt,
 .next span,
 .frame.placeholder::after {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: var(--font-destiny);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   word-spacing: normal;
 }
 
