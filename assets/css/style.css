@@ -74,7 +74,12 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   word-spacing: var(--word-wide);
   text-transform: uppercase;
 }
-.site-header a { transition: opacity 0.3s var(--ease); }
+/* Name and Info follow the off-white standard: bold title face, snug caps. */
+.site-header a {
+  font-family: var(--font-display);
+  letter-spacing: var(--track-snug);
+  transition: opacity 0.3s var(--ease);
+}
 .site-header a:hover { opacity: 0.55; }
 
 /* ---------- Placeholder media ---------- */
