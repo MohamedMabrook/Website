@@ -212,7 +212,10 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   letter-spacing: var(--track-snug);
 }
 .row .year {
-  font-size: 13px;
+  font-family: var(--font-destiny);
+  font-size: clamp(22px, 2.6vw, 36px);  /* same size as the title beside it */
+  font-weight: 800;
+  letter-spacing: 0;
   color: var(--red);
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -339,7 +342,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 /* ---------- Red text ---------- */
 /* Secondary text is red and set in the Destiny face, like the numbers. Dimmed rows turn
    red on hover but keep their face, so titles don't reflow. */
-.row .year,
 .project-head .meta,
 .credits dt,
 .next span,
