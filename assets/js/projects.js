@@ -75,7 +75,10 @@ window.PROJECTS = [
     year: 2026,
     section: "cinematography",
     role: "DP",
-    ratio: 1.78,
+    genre: "Romance",
+    ratio: 1.42,
+    poster: "media/the-flower/01.webp",
+    stills: Array.from({ length: 5 }, (_, n) => ({ src: `media/the-flower/${String(n + 1).padStart(2, "0")}.webp` })),
   },
   {
     slug: "bhm",
