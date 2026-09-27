@@ -1,8 +1,6 @@
 (function () {
   const projects = window.PROJECTS || [];
 
-  const ratioLabel = (r) => (Math.abs(r - 1.33) < 0.01 ? "4:3" : Math.abs(r - 1.78) < 0.01 ? "16:9" : r.toFixed(2) + ":1");
-
   // Builds a frame: real <video>/<img> when a source exists, drifting placeholder otherwise.
   function frame(p, opts = {}) {
     const el = document.createElement("div");
@@ -10,7 +8,7 @@
     el.className = "frame";
     el.style.setProperty("--ar", ratio);
 
-    const src = opts.src || (opts.still ? null : p.loop);
+    const src = opts.src || (opts.still ? null : p.loop || p.poster);
     if (src && /\.(mp4|webm)$/i.test(src)) {
       const v = document.createElement("video");
       Object.assign(v, { src, muted: true, loop: true, playsInline: true, preload: "metadata" });
@@ -30,7 +28,6 @@
       el.style.setProperty("--tone", (p.tone || 0) + (opts.shift || 0));
       el.style.setProperty("--x", (opts.x ?? 30) + "%");
       el.style.setProperty("--y", (opts.y ?? 60) + "%");
-      el.dataset.label = opts.label ?? ratioLabel(ratio);
     }
     return el;
   }
@@ -51,7 +48,7 @@
 
     const layer = (key, src) => {
       if (!layers[key]) {
-        const f = frame(src, { label: "" });
+        const f = frame(src);
         f.classList.add("atmos-layer");
         atmos.appendChild(f);
         layers[key] = f;
@@ -71,9 +68,9 @@
       layer("s:" + s.id, { title: s.label, ratio: 1.78, tone: s.tone, loop: s.loop, poster: s.poster });
       sec.dataset.hud = s.label;
 
-      if (s.role) {
+      if (s.list) {
         const list = sec.querySelector(".rows");
-        projects.filter((p) => p.role.includes(s.role)).forEach((p) => {
+        projects.filter((p) => p.section === s.id).forEach((p) => {
           layer("p:" + p.slug, { ...p, ratio: 1.78 });
           const a = document.createElement("a");
           a.className = "row";
@@ -114,8 +111,10 @@
     document.title = `${p.title} · Mohamed Mabrok`;
 
     project.querySelector("h1").textContent = p.title;
-    project.querySelector(".meta").textContent = [p.format, p.status || p.year].filter(Boolean).join(" · ");
-    project.querySelector(".logline").textContent = p.logline;
+    project.querySelector(".meta").textContent = [p.role, p.format, p.status || p.year].filter(Boolean).join(" · ");
+    const logline = project.querySelector(".logline");
+    if (p.logline) logline.textContent = p.logline;
+    else logline.hidden = true;
 
     const stills = project.querySelector(".stills");
     const list = p.stills && p.stills.length
@@ -126,7 +125,6 @@
         src: s.src,
         ratio: s.ratio,
         still: true,
-        label: String(n + 1).padStart(2, "0"),
         shift: (n * 17) % 40,
         x: (n * 37) % 100,
         y: (n * 53 + 20) % 100,
@@ -140,6 +138,7 @@
     stills.querySelectorAll(".frame").forEach((f) => io.observe(f));
 
     const credits = project.querySelector(".credits");
+    if (!p.credits || !p.credits.length) credits.hidden = true;
     (p.credits || []).forEach(([k, v]) => {
       const dt = document.createElement("dt"); dt.textContent = k;
       const dd = document.createElement("dd"); dd.textContent = v;

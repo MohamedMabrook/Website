@@ -100,15 +100,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   animation: drift 9s ease-in-out infinite alternate;
 }
 .frame.placeholder.static { animation: none; }
-.frame.placeholder::after {
-  content: attr(data-label);
-  position: absolute;
-  left: 12px; bottom: 10px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--red);
-  opacity: 0.6;
-}
 @keyframes drift {
   from { background-position: 0% 0%, 100% 0%, 0 0; }
   to   { background-position: 100% 100%, 0% 100%, 0 0; }
@@ -141,7 +132,6 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
     linear-gradient(160deg, hsl(var(--tone) 20% 22%), hsl(var(--tone) 15% 8%));
   background-size: 140% 140%, 130% 130%, 100% 100%;
 }
-.atmos-layer.placeholder::after { left: var(--gutter); bottom: var(--gutter); }
 
 .site-header .hud {
   position: absolute;
@@ -346,18 +336,20 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 
 /* ---------- Red text ---------- */
-/* Secondary text is red and set in the Destiny face, like the numbers. Dimmed rows turn
-   red on hover but keep their face, so titles don't reflow. */
+/* Project-page labels follow the main menu: bold Destiny face, no letter tracking,
+   wide word gap. Dimmed rows turn red on hover but keep their face. */
 .project-head .meta,
 .credits dt,
-.next span,
-.frame.placeholder::after {
+.next span {
   font-family: var(--font-destiny);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  word-spacing: normal;
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: var(--word-wide);
+  text-transform: uppercase;
+  color: var(--red);
 }
+.project-head .meta { font-size: clamp(22px, 2.6vw, 36px); }
+.credits dt, .next span { font-size: clamp(15px, 1.3vw, 18px); }
 
 /* Section label and role line: bold Destiny face like the years, red. */
 .site-header .hud,
