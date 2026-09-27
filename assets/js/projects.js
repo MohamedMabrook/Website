@@ -37,6 +37,7 @@ window.PROJECTS = [
     title: "Light Fall",
     section: "directing",
     role: "Director",
+    genre: "Fan Project",
     logline: "Adapted from Destiny 2.",
     note: "Fan project. Not affiliated with or endorsed by Bungie. Destiny 2 © Bungie, Inc. All rights reserved.",
     ratio: 1.42,
