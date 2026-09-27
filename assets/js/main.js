@@ -30,7 +30,7 @@
       el.style.setProperty("--tone", (p.tone || 0) + (opts.shift || 0));
       el.style.setProperty("--x", (opts.x ?? 30) + "%");
       el.style.setProperty("--y", (opts.y ?? 60) + "%");
-      el.dataset.label = (opts.label || "Loop") + " · " + ratioLabel(ratio);
+      el.dataset.label = opts.label ?? ratioLabel(ratio);
     }
     return el;
   }
@@ -51,7 +51,7 @@
 
     const layer = (key, src) => {
       if (!layers[key]) {
-        const f = frame(src, { label: "Atmosphere" });
+        const f = frame(src, { label: "" });
         f.classList.add("atmos-layer");
         atmos.appendChild(f);
         layers[key] = f;
@@ -69,7 +69,7 @@
       const sec = document.getElementById(s.id);
       if (!sec) return;
       layer("s:" + s.id, { title: s.label, ratio: 1.78, tone: s.tone, loop: s.loop, poster: s.poster });
-      sec.dataset.hud = String(n).padStart(2, "0") + " / " + s.label;
+      sec.dataset.hud = String(n).padStart(2, "0") + " " + s.label;
 
       if (s.role) {
         const list = sec.querySelector(".rows");
@@ -78,9 +78,8 @@
           const a = document.createElement("a");
           a.className = "row";
           a.href = `project.html#${p.slug}`;
-          a.innerHTML = '<span class="title"></span><span class="spec"></span><span class="year"></span>';
+          a.innerHTML = '<span class="title"></span><span class="year"></span>';
           a.querySelector(".title").textContent = p.title;
-          a.querySelector(".spec").textContent = [p.format, p.runtime].join(" · ");
           a.querySelector(".year").textContent = p.year;
           const on = () => { list.classList.add("has-focus"); a.classList.add("is-active"); show("p:" + p.slug); };
           const off = () => { list.classList.remove("has-focus"); a.classList.remove("is-active"); show(sectionKey); };
@@ -111,10 +110,10 @@
     window.addEventListener("hashchange", () => location.reload());
     const i = Math.max(0, projects.findIndex((p) => p.slug === slug));
     const p = projects[i];
-    document.title = `${p.title} · Mohamed Mabrook`;
+    document.title = `${p.title} · Mohamed Mabrok`;
 
     project.querySelector("h1").textContent = p.title;
-    project.querySelector(".meta").textContent = [p.role, p.format, p.runtime, p.year].join(" · ");
+    project.querySelector(".meta").textContent = [p.format, p.year].join(" · ");
     project.querySelector(".logline").textContent = p.logline;
 
     const stills = project.querySelector(".stills");
@@ -126,7 +125,7 @@
         src: s.src,
         ratio: s.ratio,
         still: true,
-        label: `Still ${String(n + 1).padStart(2, "0")}`,
+        label: String(n + 1).padStart(2, "0"),
         shift: (n * 17) % 40,
         x: (n * 37) % 100,
         y: (n * 53 + 20) % 100,

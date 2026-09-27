@@ -16,4 +16,4 @@ poster: "media/the-long-road/poster.jpg",
 stills: [{ src: "media/the-long-road/01.jpg" }, { src: "media/the-long-road/02.jpg", ratio: 1.85 }],
 ```
 
-Anything without a path renders as a drifting placeholder frame labeled with its aspect ratio.
+Anything without a path renders as a drifting placeholder frame.
