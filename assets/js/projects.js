@@ -47,6 +47,15 @@ window.PROJECTS = [
     tone: 0,
   },
   {
+    slug: "dominion",
+    title: "Dominion",
+    year: 2026,
+    section: "cinematography",
+    role: "DP",
+    ratio: 1.78,
+    tone: 190,
+  },
+  {
     slug: "dark-knight-test",
     title: "Dark Knight Test",
     year: 2025,
