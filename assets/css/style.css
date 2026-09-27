@@ -290,11 +290,18 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   margin-top: 120px;
   display: grid;
   grid-template-columns: max-content 1fr;
+  align-items: baseline;
   gap: 8px 32px;
-  font-size: 14px;
   max-width: 560px;
 }
 .credits dt { color: var(--red); }
+.credits dd {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: var(--track-snug);
+  text-transform: uppercase;
+}
 
 .next {
   display: block;
