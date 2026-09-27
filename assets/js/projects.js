@@ -96,6 +96,16 @@ window.PROJECTS = [
     poster: "media/bhm/01.webp",
     stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/bhm/0${n + 1}.webp` })),
   },
+  {
+    slug: "zulu",
+    title: "Zulu",
+    section: "cinematography",
+    role: "DP",
+    genre: "Ad",
+    ratio: 1.78,
+    poster: "media/zulu/01.webp",
+    stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/zulu/0${n + 1}.webp` })),
+  },
 ];
 
 // Homepage sections, in page order. The header shows the label of the one on screen.
