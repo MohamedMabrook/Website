@@ -27,7 +27,7 @@ window.PROJECTS = [
     role: "Director / DP / Color / Edit",
     ratio: 2.37,
     poster: "media/get-experimental/01.webp",
-    stills: Array.from({ length: 10 }, (_, n) => ({ src: `media/get-experimental/${String(n + 1).padStart(2, "0")}.webp` })),
+    stills: Array.from({ length: 15 }, (_, n) => ({ src: `media/get-experimental/${String(n + 1).padStart(2, "0")}.webp` })),
     tone: 150,
   },
   {
