@@ -91,7 +91,10 @@ window.PROJECTS = [
     year: 2026,
     section: "cinematography",
     role: "DP",
-    ratio: 1.78,
+    genre: "Culture Piece",
+    ratio: 1.33,
+    poster: "media/bhm/01.webp",
+    stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/bhm/0${n + 1}.webp` })),
   },
 ];
 
