@@ -77,7 +77,7 @@
           layer("p:" + p.slug, { ...p, ratio: 1.78 });
           const a = document.createElement("a");
           a.className = "row";
-          a.href = `project.html?p=${p.slug}`;
+          a.href = `project.html#${p.slug}`;
           a.innerHTML = '<span class="title"></span><span class="spec"></span><span class="year"></span>';
           a.querySelector(".title").textContent = p.title;
           a.querySelector(".spec").textContent = [p.format, p.runtime].join(" · ");
@@ -107,7 +107,8 @@
   // ---------- Project page ----------
   const project = document.querySelector(".project");
   if (project) {
-    const slug = new URLSearchParams(location.search).get("p");
+    const slug = location.hash.slice(1);
+    window.addEventListener("hashchange", () => location.reload());
     const i = Math.max(0, projects.findIndex((p) => p.slug === slug));
     const p = projects[i];
     document.title = `${p.title} · Mohamed Mabrook`;
@@ -147,7 +148,7 @@
 
     const next = projects[(i + 1) % projects.length];
     const nextLink = project.querySelector(".next");
-    nextLink.href = `project.html?p=${next.slug}`;
+    nextLink.href = `project.html#${next.slug}`;
     nextLink.querySelector("strong").textContent = next.title;
   }
 })();

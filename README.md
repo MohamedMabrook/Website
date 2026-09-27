@@ -4,7 +4,7 @@ Static site, no build step. Open `index.html` or serve the folder (`python3 -m h
 
 - `assets/js/projects.js` holds every project. Edit this file to add or change work.
 - `index.html` scroll sections (Reel, Directing, Cinematography, Info). As each section reaches mid-screen, its footage fades in over the whole page at 30% (screen blend). Hovering a film swaps in that film's loop. Sections are defined in `window.SECTIONS` in `projects.js`; give each a `loop` to replace the placeholder.
-- `project.html?p=<slug>` stills sequence, credits, next project.
+- `project.html#<slug>` stills sequence, credits, next project.
 
 ## Replacing placeholders
 
