@@ -44,7 +44,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-text);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0;
@@ -68,7 +68,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-destiny);
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 800;
   letter-spacing: 0;
   word-spacing: var(--word-wide);
@@ -142,14 +142,14 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(56px, 12vw, 200px);
+  font-size: clamp(52px, 10.5vw, 170px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: var(--track-tight);
   line-height: 0.84;
 }
 .hero .role, .hero .cue {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
@@ -160,13 +160,13 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   right: var(--gutter);
   bottom: 80px;
 }
-.hero .cue { font-size: 28px; letter-spacing: 0; }
+.hero .cue { font-size: 25px; letter-spacing: 0; }
 
 .category h2 {
   display: flex;
   align-items: baseline;
   font-family: var(--font-display);
-  font-size: clamp(40px, 7vw, 112px);
+  font-size: clamp(36px, 6vw, 96px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: var(--track-snug);
@@ -186,14 +186,14 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .row .title {
   font-family: var(--font-display);
-  font-size: clamp(22px, 2.6vw, 36px);
+  font-size: clamp(20px, 2.3vw, 33px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: var(--track-snug);
 }
 .row .year {
   font-family: var(--font-destiny);
-  font-size: clamp(22px, 2.6vw, 36px);  /* same size as the title beside it */
+  font-size: clamp(20px, 2.3vw, 33px);  /* same size as the title beside it */
   font-weight: 800;
   letter-spacing: 0;
   color: var(--red);
@@ -208,7 +208,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .row.work { grid-template-columns: 1fr auto auto; }
 .row .genre {
   font-family: var(--font-destiny);
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 800;
   letter-spacing: 0;
   word-spacing: var(--word-wide);
@@ -223,7 +223,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 
 @media (max-width: 720px) {
   .site-header .hud { display: none; }
-  .category h2 { font-size: 8.4vw; }
+  .category h2 { font-size: 7.8vw; }
   /* Genre drops under the title on phones. */
   .row.work { grid-template-columns: 1fr auto; row-gap: 4px; }
   .row.work .title { grid-column: 1; grid-row: 1; }
@@ -240,7 +240,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .project-head { margin-bottom: 72px; }
 .project-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 72px);
+  font-size: clamp(30px, 4.3vw, 62px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: var(--track-snug);
@@ -248,7 +248,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .project-head .meta {
   margin-top: 14px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
@@ -257,7 +257,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .project-head .logline {
   margin-top: 28px;
   font-family: var(--font-destiny);
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 800;
   word-spacing: var(--word-wide);
   text-transform: uppercase;
@@ -265,7 +265,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .project-head .note {
   margin-top: 10px;
   max-width: 60em;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.5;
   color: var(--red);
@@ -297,7 +297,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 .credits dt { color: var(--red); }
 .credits dd {
   font-family: var(--font-display);
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 800;
   letter-spacing: var(--track-snug);
   text-transform: uppercase;
@@ -311,7 +311,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
 }
 .next span {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: var(--track-wide);
   text-transform: uppercase;
@@ -321,7 +321,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   display: block;
   margin-top: 6px;
   font-family: var(--font-display);
-  font-size: clamp(24px, 3.2vw, 40px);
+  font-size: clamp(21px, 2.8vw, 37px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: var(--track-snug);
@@ -347,8 +347,8 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   text-transform: uppercase;
   color: var(--red);
 }
-.project-head .meta { font-size: clamp(22px, 2.6vw, 36px); }
-.credits dt, .next span { font-size: clamp(15px, 1.3vw, 18px); }
+.project-head .meta { font-size: clamp(20px, 2.3vw, 33px); }
+.credits dt, .next span { font-size: clamp(13px, 1.1vw, 15px); }
 
 /* Section label and role line: bold Destiny face like the years, red. */
 .site-header .hud,
@@ -361,7 +361,7 @@ a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
   color: var(--red);
 }
 .site-header .hud { font-size: inherit; }
-.hero .role { font-size: clamp(22px, 2.6vw, 36px); }
+.hero .role { font-size: clamp(20px, 2.3vw, 33px); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

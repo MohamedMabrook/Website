@@ -116,7 +116,7 @@ window.PROJECTS = [
     ratio: 1.33,
     poster: "media/bhm/01.webp",
     stills: Array.from({ length: 4 }, (_, n) => ({ src: `media/bhm/0${n + 1}.webp` })),
-    credits: [["Director", "Simon Sanjur"]],
+    credits: [["Director", "Smon Emahazien"]],
   },
   {
     slug: "zulu",
