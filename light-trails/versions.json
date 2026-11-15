@@ -1,0 +1,59 @@
+{
+  "versions": [
+    {
+      "version": "2.1",
+      "kind": "ofx",
+      "date": "2026-11-15",
+      "title": "Static-light streaks (Inward), crash fixes",
+      "recommended": true,
+      "file": "versions/2.1/LightTrails-2.1-OFX-Windows.zip",
+      "where": "Color page > Effects > OpenFX > Light Trails",
+      "notes": [
+        "Direction: Inward (default), Outward, Up, Angle trail from still lamps using only the current frame. Follow Motion keeps the old behavior.",
+        "Fixes the brighter-highlights-but-no-trails result on locked-off shots.",
+        "Likely fix for the Decay crash: never fetches a frame it did not declare; the frame cache tolerates grain; Resolve's GPU buffers are size-checked; every render is logged first.",
+        "Length is now % of frame width; Rise and Angle added; Drift removed."
+      ]
+    },
+    {
+      "version": "2.0",
+      "kind": "ofx",
+      "date": "2026-11-15",
+      "title": "Quality menu, depth band, GPU only",
+      "recommended": false,
+      "file": "versions/2.0/LightTrails-2.0-OFX-Windows.zip",
+      "where": "Color page > Effects > OpenFX > Light Trails",
+      "notes": [
+        "Quality Low / Medium / High / Final, whites-only key, depth band, GPU frame cache, Resolve CUDA buffers.",
+        "Known problems: trails only from moving lights (still lamps just get brighter); could fetch undeclared frames after a cache reset (suspected crash)."
+      ]
+    },
+    {
+      "version": "1.1",
+      "kind": "ofx",
+      "date": "2026-11-15",
+      "title": "First CUDA build, CPU fallback",
+      "recommended": false,
+      "file": "versions/1.1/LightTrails-1.1-OFX-Windows.zip",
+      "where": "Color page > Effects > OpenFX > Light Trails",
+      "notes": [
+        "All trail math on the GPU with automatic CPU fallback; Use GPU switch in the Device group.",
+        "Untick Use GPU to get 1.0's CPU-only behavior.",
+        "Known problems: very slow in Resolve (every render re-fetches 12 frames through CPU memory); trails only from moving lights."
+      ]
+    },
+    {
+      "version": "0.1",
+      "kind": "fuse",
+      "date": "2026-11-13",
+      "title": "Fusion Fuse (first version) + original DCTL",
+      "recommended": false,
+      "file": "versions/0.1/LightTrails-0.1-Fuse.zip",
+      "where": "Fusion page > Shift+Space > Light Trails",
+      "notes": [
+        "Lua Fuse with DCTL compute kernels; Fusion page only.",
+        "The zip also keeps the original single-frame LightTrails.dctl and preview.py from the first project."
+      ]
+    }
+  ]
+}

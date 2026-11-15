@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light Trails</title>
+<meta name="description" content="Light Trails for DaVinci Resolve: every version, side by side, with a one-click installer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000; --fg: #f1e9c6; --dim: #b9b29a; --red: #a3000b; --faint: #2a0205; --card: #0b0907;
+    --gutter: clamp(16px, 3vw, 40px);
+    --font: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--font); }
+  a { color: var(--fg); }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 18px var(--gutter); border-bottom: 1px solid var(--faint); }
+  header a { text-decoration: none; font-weight: 700; letter-spacing: .02em; }
+  header span { color: var(--red); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 var(--gutter) 80px; }
+  h1 { font-weight: 800; font-size: clamp(44px, 9vw, 96px); line-height: .95; margin: 56px 0 12px; letter-spacing: -.02em; }
+  h2 { font-weight: 800; font-size: clamp(26px, 4vw, 36px); margin: 64px 0 8px; letter-spacing: -.01em; }
+  h3 { font-weight: 700; font-size: 20px; margin: 0; }
+  .label { color: var(--red); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; }
+  .lede { color: var(--dim); max-width: 60ch; font-size: 18px; margin: 0; }
+  p { max-width: 70ch; }
+  .muted { color: var(--dim); }
+  .btn { display: inline-block; background: var(--fg); color: #000; font-weight: 700; padding: 12px 18px; text-decoration: none; border-radius: 2px; }
+  .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--fg); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 20px 0; }
+  pre { margin: 0; overflow-x: auto; white-space: pre; }
+  .cmd { position: relative; background: var(--card); border: 1px solid var(--faint); padding: 14px 92px 14px 14px; font: 13px/1.5 var(--mono); color: var(--fg); }
+  .cmd button { position: absolute; top: 8px; right: 8px; background: transparent; color: var(--fg); border: 1px solid var(--dim); font: 600 12px var(--font); padding: 6px 10px; cursor: pointer; }
+  ol, ul { padding-left: 1.2em; max-width: 70ch; }
+  li { margin: 4px 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 20px; }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; display: block; border: 1px solid var(--faint); background: #050505; }
+  figcaption { font-size: 14px; color: var(--dim); margin-top: 8px; }
+  figcaption b { color: var(--fg); }
+  .card { background: var(--card); border: 1px solid var(--faint); padding: 20px; margin-top: 16px; }
+  .card.rec { border-color: var(--red); }
+  .card .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .card .ver { font-weight: 800; font-size: 28px; margin-right: 10px; }
+  .tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 8px; border: 1px solid var(--red); color: var(--fg); }
+  .card ul { margin: 12px 0; color: var(--dim); }
+  .card ul b { color: var(--fg); }
+  .table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--faint); }
+  table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--faint); vertical-align: top; }
+  th { color: var(--red); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+  td.yes { color: var(--fg); } td.no { color: #8a6f6f; }
+  code { font: 13px var(--mono); background: var(--card); padding: 1px 5px; border: 1px solid var(--faint); }
+  footer { color: var(--dim); font-size: 13px; border-top: 1px solid var(--faint); padding: 20px var(--gutter); }
+</style>
+</head>
+<body>
+<header>
+  <a href="../index.html">Mohamed Mabrok</a>
+  <span>DaVinci Resolve plugin</span>
+</header>
+<main>
+  <h1>Light Trails</h1>
+  <p class="lede">Wavy, smoky trails from the hottest white lights, for the analog-horror street look. Every version is kept here, so you can compare them and switch with one click.</p>
+
+  <h2 id="install">Install</h2>
+  <div class="row">
+    <a class="btn" href="Install-LightTrails.bat" download>Download installer</a>
+    <a class="btn ghost" href="#versions">Pick a version</a>
+  </div>
+  <ol>
+    <li>Run <code>Install-LightTrails.bat</code>. It shows every version and what's installed now. Press Enter for the recommended one, or type a number.</li>
+    <li>Windows asks for administrator rights, because OpenFX plugins live in Program Files. If Resolve is open, the installer waits for you to close it.</li>
+    <li>Whatever it replaces is backed up first to <code>%LOCALAPPDATA%\LightTrails\backup</code>.</li>
+  </ol>
+  <p class="muted">Or from PowerShell, with the same menu:</p>
+  <div class="cmd"><pre id="c-menu">irm https://raw.githubusercontent.com/MohamedMabrook/Website/claude/pensive-ride-egnx10/light-trails/install.ps1 | iex</pre><button data-copy="c-menu">Copy</button></div>
+
+  <h2 id="compare">Compare</h2>
+  <p class="muted">The same synthetic night street through each mode: still warm lamps, a few distant lights, and one red neon sign that should not trail.</p>
+  <div class="grid">
+    <figure><img src="img/scene_source.jpg" alt="Source street scene with still lamps" loading="lazy"><figcaption><b>Source.</b> Lamps don't move.</figcaption></figure>
+    <figure><img src="img/v2.1_inward.jpg" alt="Light Trails 2.1, Inward" loading="lazy"><figcaption><b>2.1, Inward (default).</b> Side lamps trail toward the middle. The red neon is left alone.</figcaption></figure>
+    <figure><img src="img/follow_motion_on_still_lamps.jpg" alt="Follow Motion on still lamps" loading="lazy"><figcaption><b>1.1 and 2.0 (Follow Motion).</b> Still lamps only get brighter, which is the bug you hit.</figcaption></figure>
+    <figure><img src="img/v2.1_up.jpg" alt="Light Trails 2.1, Up" loading="lazy"><figcaption><b>2.1, Up.</b> Rising smoke.</figcaption></figure>
+    <figure><img src="img/v2.1_trails_only.jpg" alt="Light Trails 2.1, trails only" loading="lazy"><figcaption><b>2.1, Blend: Trails Only.</b> The layer that gets added.</figcaption></figure>
+    <figure><img src="img/v2.1_show_mask.jpg" alt="Light Trails 2.1, Show Mask" loading="lazy"><figcaption><b>2.1, Show Mask.</b> Only the hot white points qualify.</figcaption></figure>
+  </div>
+
+  <h2 id="versions">Versions</h2>
+
+  <div class="card rec">
+    <div class="top"><div><span class="ver">2.1</span><span class="tag">Recommended</span></div><span class="label">OpenFX · Color page · NVIDIA GPU</span></div>
+    <ul>
+      <li><b>Trails on still lamps.</b> Inward (default), Outward, Up or Angle need only the current frame. Follow Motion keeps the old behavior.</li>
+      <li><b>Likely Decay-crash fix.</b> It never fetches a frame it didn't declare, its cache tolerates grain, Resolve's GPU buffers are size-checked, and every render is logged first.</li>
+      <li>Length is now % of frame width. Rise and Angle are new; Drift is gone.</li>
+    </ul>
+    <div class="row"><a class="btn ghost" href="versions/2.1/LightTrails-2.1-OFX-Windows.zip">Zip</a></div>
+    <div class="cmd"><pre id="c21">&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/MohamedMabrook/Website/claude/pensive-ride-egnx10/light-trails/install.ps1))) -Version 2.1</pre><button data-copy="c21">Copy</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><span class="ver">2.0</span></div><span class="label">OpenFX · Color page · NVIDIA GPU</span></div>
+    <ul>
+      <li>Quality menu (Low to Final), whites-only key, depth band, GPU frame cache, Resolve CUDA buffers.</li>
+      <li><b>Known problems:</b> trails only from moving lights, and it could fetch frames it hadn't declared (suspected crash).</li>
+    </ul>
+    <div class="row"><a class="btn ghost" href="versions/2.0/LightTrails-2.0-OFX-Windows.zip">Zip</a></div>
+    <div class="cmd"><pre id="c20">&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/MohamedMabrook/Website/claude/pensive-ride-egnx10/light-trails/install.ps1))) -Version 2.0</pre><button data-copy="c20">Copy</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><span class="ver">1.1</span></div><span class="label">OpenFX · Color page · GPU + CPU</span></div>
+    <ul>
+      <li>First CUDA build, with a CPU fallback. Untick <b>Use GPU</b> to get 1.0's CPU-only behavior.</li>
+      <li><b>Known problems:</b> very slow (12 frames re-fetched through CPU memory every render), and trails only from moving lights.</li>
+    </ul>
+    <div class="row"><a class="btn ghost" href="versions/1.1/LightTrails-1.1-OFX-Windows.zip">Zip</a></div>
+    <div class="cmd"><pre id="c11">&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/MohamedMabrook/Website/claude/pensive-ride-egnx10/light-trails/install.ps1))) -Version 1.1</pre><button data-copy="c11">Copy</button></div>
+  </div>
+
+  <div class="card">
+    <div class="top"><div><span class="ver">0.1</span></div><span class="label">Fuse · Fusion page</span></div>
+    <ul>
+      <li>The first version: a Lua Fuse with GPU kernels, for the Fusion page. It installs alongside the OpenFX versions without conflict.</li>
+      <li>The zip also keeps the original single-frame <code>LightTrails.dctl</code> and <code>preview.py</code>.</li>
+    </ul>
+    <div class="row"><a class="btn ghost" href="versions/0.1/LightTrails-0.1-Fuse.zip">Zip</a></div>
+    <div class="cmd"><pre id="c01">&amp; ([scriptblock]::Create((irm https://raw.githubusercontent.com/MohamedMabrook/Website/claude/pensive-ride-egnx10/light-trails/install.ps1))) -Version 0.1</pre><button data-copy="c01">Copy</button></div>
+  </div>
+
+  <p class="muted">1.0 (CPU only) isn't in the archive: its build was overwritten when 1.1 was compiled. 1.1 with Use GPU unticked runs the same CPU path. If you still have the 1.0 zip from the chat, send it over and it goes in here.</p>
+
+  <h2 id="table">Side by side</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Version</th><th>Page</th><th>Renders on</th><th>Still lamps trail</th><th>Frames per tweak</th><th>Quality menu</th><th>Depth</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>2.1</b></td><td>Color, Edit</td><td>GPU (CUDA)</td><td class="yes">Yes</td><td>1 (Inward, Outward, Up, Angle)</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Recommended</td></tr>
+        <tr><td>2.0</td><td>Color, Edit</td><td>GPU (CUDA)</td><td class="no">No</td><td>1 when cached, up to 13 after a reset</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Suspected crash</td></tr>
+        <tr><td>1.1</td><td>Color, Edit</td><td>GPU, CPU fallback</td><td class="no">No</td><td>13</td><td class="no">No</td><td class="no">No</td><td>Very slow</td></tr>
+        <tr><td>0.1</td><td>Fusion</td><td>GPU (Fusion)</td><td class="no">Only with Drift</td><td>13</td><td class="no">No</td><td class="no">No</td><td>Archive</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="help">If something goes wrong</h2>
+  <ul>
+    <li><b>The plugin log</b> is <code>%TEMP%\LightTrails.log</code>. In 2.1, every render writes a line before it starts, so after a crash the last line shows what was running. Send that file.</li>
+    <li><b>Not in the OpenFX list:</b> run the installer again and check that it prints <i>Installed to …\OFX\Plugins\LightTrails.ofx.bundle</i>, then restart Resolve.</li>
+    <li><b>Go back to a version:</b> run the installer and pick it. Only one OpenFX version is installed at a time.</li>
+    <li><b>Remove it:</b> run the installer and press <code>U</code>.</li>
+  </ul>
+</main>
+<footer>Light Trails · OpenFX plugin for DaVinci Resolve Studio on Windows · NVIDIA GPU required for 2.x</footer>
+<script>
+  document.querySelectorAll("button[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = document.getElementById(b.dataset.copy).textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+        b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500);
+      }, function () { b.textContent = "Select + Ctrl+C"; });
+    });
+  });
+</script>
+</body>
+</html>
